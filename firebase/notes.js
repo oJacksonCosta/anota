@@ -11,7 +11,14 @@ import {
 } from "firebase/firestore";
 
 // Cria uma nova nota
-export const createNote = async (title, type, priority, content, userId) => {
+export const createNote = async (
+  title,
+  type,
+  priority,
+  status,
+  content,
+  userId
+) => {
   let ret = {
     status: false,
     errorMessage: "",
@@ -22,6 +29,7 @@ export const createNote = async (title, type, priority, content, userId) => {
       title: title,
       type: type,
       priority: priority,
+      status: status,
       content: content,
       userId: userId,
     });
@@ -80,6 +88,28 @@ export const updateNote = async (noteId, newTitle, newContent) => {
   }
 };
 
+// Conclui uma tarefa
+export const concludeTask = async (noteId) => {
+  let ret = {
+    status: false,
+    errorMessage: "",
+  };
+
+  try {
+    const noteDoc = doc(db, "notes", noteId);
+    await updateDoc(noteDoc, { status: "concluded" });
+    console.log("Tarefa concluída com sucesso!");
+
+    ret.status = true;
+    ret.errorMessage = "";
+  } catch (err) {
+    console.error("Erro ao concluir tarefa: ", err);
+
+    ret.status = false;
+    ret.errorMessage = "Erro ao concluir tarefa: " + err;
+  }
+};
+
 // Obtém todas as notas de um usuário
 export const getNotes = async (userId) => {
   let ret = {
@@ -101,6 +131,7 @@ export const getNotes = async (userId) => {
         title: doc.data().title,
         type: doc.data().type,
         priority: doc.data().priority,
+        status: doc.data().status,
         content: doc.data().content,
       });
     });

@@ -26,10 +26,10 @@ export const registerUser = async (email, password) => {
   } catch (error) {
     switch (error.code) {
       case "auth/email-already-in-use":
-        console.error("Este email já está sendo usado.");
+        console.error("Este email já está sendo utilizado.");
 
         ret.status = false;
-        ret.errorMessage = "Este email já está sendo usado.";
+        ret.errorMessage = "Este email já está sendo utilizado.";
 
         break;
       case "auth/invalid-email":
