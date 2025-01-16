@@ -26,29 +26,41 @@ export const registerUser = async (email, password) => {
   } catch (error) {
     switch (error.code) {
       case "auth/email-already-in-use":
-        console.error("Este email já está sendo utilizado.");
+        //console.error("Este email já está sendo utilizado.");
 
         ret.status = false;
         ret.errorMessage = "Este email já está sendo utilizado.";
 
         break;
       case "auth/invalid-email":
-        console.error("O email fornecido é inválido.");
+        //console.error("O email fornecido é inválido.");
 
         ret.status = false;
         ret.errorMessage = "O email fornecido é inválido.";
 
         break;
       case "auth/weak-password":
-        console.error("A senha é muito fraca. Escolha uma senha mais forte.");
+        //console.error("A senha é muito fraca. Escolha uma senha mais forte.");
 
         ret.status = false;
         ret.errorMessage =
           "A senha é muito fraca. Escolha uma senha mais forte.";
 
         break;
+
+      case "auth/password-does-not-meet-requirements":
+        // console.error(
+        //   "A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais."
+        // );
+
+        ret.status = false;
+        ret.errorMessage =
+          "A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.";
+
+        break;
+
       default:
-        console.error("Erro ao criar usuário:", error.message);
+        //console.error("Erro ao criar usuário:", error.message);
 
         ret.status = false;
         ret.errorMessage = "Erro ao criar usuário: " + error.message;
@@ -73,18 +85,18 @@ export const loginUser = async (email, password) => {
     );
     const user = userCredential.user;
 
-    console.log("Usuário logado com sucesso:", user.uid);
+    //console.log("Usuário logado com sucesso:", user.uid);
 
     ret.status = true;
     ret.errorMessage = "";
   } catch (err) {
     if (err.code === "auth/invalid-credential") {
-      console.error("Credenciais inválidas.");
+      //console.error("Credenciais inválidas.");
 
       ret.status = false;
       ret.errorMessage = "Credenciais inválidas.";
     } else {
-      console.error("Erro ao fazer login: ", err.message);
+      //console.error("Erro ao fazer login: ", err.message);
 
       ret.status = false;
       ret.errorMessage = "Erro ao fazer login: " + err.message;
@@ -93,3 +105,5 @@ export const loginUser = async (email, password) => {
 
   return ret;
 };
+
+registerUser("email@email.com", "Abc1234#");

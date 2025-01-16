@@ -33,12 +33,12 @@ export const createNote = async (
       content: content,
       userId: userId,
     });
-    console.log("Nota criada com sucesso, ID: ", docRef.id);
+    //console.log("Nota criada com sucesso, ID: ", docRef.id);
 
     ret.status = true;
     ret.errorMessage = "";
   } catch (err) {
-    console.error("Erro ao adicionar a nota: ", err);
+    //console.error("Erro ao adicionar a nota: ", err);
 
     ret.status = false;
     ret.errorMessage = "Erro ao adicionar a nota: " + err;
@@ -54,12 +54,12 @@ export const deleteNote = async (noteId) => {
 
   try {
     await deleteDoc(doc(db, "notes", noteId));
-    console.log("Nota deletada com sucesso!");
+    //console.log("Nota deletada com sucesso!");
 
     ret.status = true;
     ret.errorMessage = "";
   } catch (err) {
-    console.error("Erro ao deletar a nota: ", err);
+    //console.error("Erro ao deletar a nota: ", err);
 
     ret.status = false;
     ret.errorMessage = "Erro ao deletar a nota: " + err;
@@ -76,12 +76,12 @@ export const updateNote = async (noteId, newTitle, newContent) => {
   try {
     const noteDoc = doc(db, "notes", noteId);
     await updateDoc(noteDoc, { title: newTitle, content: newContent });
-    console.log("Nota atualizada com sucesso!");
+    //console.log("Nota atualizada com sucesso!");
 
     ret.status = true;
     ret.errorMessage = "";
   } catch (err) {
-    console.error("Erro ao atualizar a nota: ", err);
+    //console.error("Erro ao atualizar a nota: ", err);
 
     ret.status = false;
     ret.errorMessage = "Erro ao atualizar a nota: " + err;
@@ -98,12 +98,12 @@ export const concludeTask = async (noteId) => {
   try {
     const noteDoc = doc(db, "notes", noteId);
     await updateDoc(noteDoc, { status: "concluded" });
-    console.log("Tarefa concluída com sucesso!");
+    //console.log("Tarefa concluída com sucesso!");
 
     ret.status = true;
     ret.errorMessage = "";
   } catch (err) {
-    console.error("Erro ao concluir tarefa: ", err);
+    //console.error("Erro ao concluir tarefa: ", err);
 
     ret.status = false;
     ret.errorMessage = "Erro ao concluir tarefa: " + err;
@@ -136,12 +136,12 @@ export const getNotes = async (userId) => {
       });
     });
 
-    console.log(notes);
+    //console.log(notes);
     ret.status = true;
     ret.errorMessage = "";
     ret.notes = notes;
   } catch (error) {
-    console.error("Erro ao obter as notas: ", error);
+    //console.error("Erro ao obter as notas: ", error);
 
     ret.status = false;
     ret.errorMessage = "Erro ao obter as notas: " + error;
