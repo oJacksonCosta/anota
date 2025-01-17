@@ -5,10 +5,39 @@ input {
   color: var(--white);
   font-size: 1rem;
   height: 2.8rem;
-  margin-bottom: 0.8rem;
   padding-inline: 1rem;
 }
 
 input:focus {
+  font-weight: 500;
   outline: 2px solid var(--blue);
+}
+
+.input-container {
+  height: 2.8rem;
+  margin-bottom: 0.8rem;
+  position: relative;
+  width: 100%;
+}
+
+.eye-btn {
+  background-color: transparent;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: block;
+  padding: 0 0.2rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.eye-btn:focus {
+  outline: 2px solid var(--blue);
+}
+
+.eye-btn > i {
+  color: #a3a3a3;
+  font-size: 1.2rem;
 }

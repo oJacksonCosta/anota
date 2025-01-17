@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import BannerImg from "../../components/banner-img/Banner-img";
-import Form1 from "../../components/form-1/Form-1";
-import Logo from "../../components/logo/Logo";
-import "./register.css";
+import "./Login.css";
 import Background from "../../components/background/Background";
+import BannerImg from "../../components/banner-img/Banner-img";
+import Logo from "../../components/logo/Logo";
+import Form2 from "../../components/form-2/Form-2";
+import { Link } from "react-router-dom";
 
-export default function Register() {
+export default function Login() {
   return (
     <Background>
       <section className="container">
@@ -14,12 +14,12 @@ export default function Register() {
         </div>
         <div className="right-container">
           <Logo />
-          <p>Cadastre-se para poder criar suas notas!</p>
-          <Form1 />
+          <p>Entre e anote suas ideias, do seu jeito!</p>
+          <Form2 />
           <p style={{ marginTop: "2rem" }}>
-            Já tem uma conta?{" "}
-            <Link id="link-to" to="/login">
-              Login
+            Ainda não tem uma conta?{" "}
+            <Link id="link-to" to="/register">
+              Cadastre-se
             </Link>
             .
           </p>

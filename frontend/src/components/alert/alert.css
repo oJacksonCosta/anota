@@ -1,7 +1,7 @@
-.alert-sucess,
+.alert-success,
 .alert-error {
-  border-radius: 1rem;
-  padding: 1rem 1.5rem;
+  border-radius: 0.8rem;
+  padding: 0.8rem 1.2rem;
   position: fixed;
   top: 1.5rem;
   left: 50%;
@@ -9,11 +9,11 @@
   z-index: 1000;
 }
 
-.alert-sucess {
+.alert-success {
   background-color: #d4edda;
 }
 
-.alert-sucess > p {
+.alert-success > p {
   color: #155724;
   font-weight: 500;
   margin: 0;

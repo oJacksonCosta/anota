@@ -3,6 +3,7 @@ import Input from "../input/Input";
 import Button1 from "../button-1/Button-1";
 import { useState } from "react";
 import { registerUser } from "../../../../firebase/users";
+import { useNavigate } from "react-router-dom";
 import Alert from "../alert/Alert";
 
 export default function Form1() {
@@ -14,10 +15,12 @@ export default function Form1() {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Verifica se os campos estão preenchidos corretamente
+    // Validações
     if (!email) {
       setAlertMessage("Por favor, preencha o campo de email.");
       setAlertType("error");
@@ -39,14 +42,18 @@ export default function Form1() {
 
     if (result.status) {
       setAlertMessage("Usuário registrado com sucesso!");
-      setAlertType("sucess");
+      setAlertType("success");
       setShowAlert(true);
 
+      // Limpa os campos
       setEmail("");
       setPassword("");
       setConfirmPassword("");
 
-      // Redirecionar para a página de login após o registro bem-sucedido
+      // Redireciona para a página de login
+      setTimeout(() => {
+        navigate("/login");
+      }, 300);
     } else {
       setAlertMessage(result.errorMessage);
       setAlertType("error");
@@ -59,32 +66,36 @@ export default function Form1() {
   };
 
   return (
-    <form className="form-1">
+    <form className="form-1" onSubmit={handleSubmit}>
       <Alert
         message={alertMessage}
         type={alertType}
         isShowing={showAlert}
         onClose={closeAlert}
+        time={3000}
       />
       <Input
         type="email"
         placeholder="Digite seu e-mail"
         width="100%"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
         type="password"
         placeholder="Digite sua senha"
         width="100%"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <Input
         type="password"
         placeholder="Confirme sua senha"
         width="100%"
+        value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <Button1 text="Cadastrar" width="100%" onClick={handleSubmit} />
+      <Button1 text="Cadastrar" width="100%" />
     </form>
   );
 }
