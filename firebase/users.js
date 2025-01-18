@@ -23,8 +23,8 @@ export const registerUser = async (email, password) => {
 
     ret.status = true;
     ret.errorMessage = "";
-  } catch (error) {
-    switch (error.code) {
+  } catch (err) {
+    switch (err.code) {
       case "auth/email-already-in-use":
         //console.error("Este email já está sendo utilizado.");
 
@@ -90,20 +90,23 @@ export const loginUser = async (email, password) => {
     ret.status = true;
     ret.errorMessage = "";
   } catch (err) {
-    if (err.code === "auth/invalid-credential") {
-      //console.error("Credenciais inválidas.");
+    switch (err.code) {
+      case "auth/invalid-email":
+        ret.status = false;
+        ret.errorMessage = "E-mail inválido.";
 
-      ret.status = false;
-      ret.errorMessage = "Credenciais inválidas.";
-    } else {
-      //console.error("Erro ao fazer login: ", err.message);
+        break;
+      case "auth/invalid-credential":
+        ret.status = false;
+        ret.errorMessage = "Senha inválida.";
 
-      ret.status = false;
-      ret.errorMessage = "Erro ao fazer login: " + err.message;
+        break;
+
+      default:
+        ret.status = false;
+        ret.errorMessage = "Erro ao fazer login: " + err.message;
     }
   }
 
   return ret;
 };
-
-registerUser("email@email.com", "Abc1234#");

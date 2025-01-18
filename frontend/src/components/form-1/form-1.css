@@ -6,3 +6,11 @@
   position: relative;
   width: 60%;
 }
+
+.alert-container {
+  display: flex;
+  height: 0;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}

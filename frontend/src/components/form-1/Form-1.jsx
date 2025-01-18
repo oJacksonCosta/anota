@@ -27,7 +27,7 @@ export default function Form1() {
 
     // Validações
     if (!email) {
-      setAlertMessage("Por favor, preencha o campo de email.");
+      setAlertMessage("Por favor, preencha o campo de e-mail.");
       setAlertType("error");
       setShowAlert(true);
       setIsLoading(false);
@@ -99,14 +99,21 @@ export default function Form1() {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <Button1 text={"Cadastrar"} width="100%" isLoading={isLoading} />
-      <Alert
-        message={alertMessage}
-        type={alertType}
-        isShowing={showAlert}
-        onClose={closeAlert}
-        time={time}
+      <Button1
+        text="Cadastrar"
+        width="100%"
+        isLoading={isLoading}
+        type="submit"
       />
+      <div className="alert-container">
+        <Alert
+          message={alertMessage}
+          type={alertType}
+          isShowing={showAlert}
+          onClose={closeAlert}
+          time={time}
+        />
+      </div>
     </form>
   );
 }

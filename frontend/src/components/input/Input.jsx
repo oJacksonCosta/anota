@@ -25,6 +25,8 @@ export default function InputMail({
         />
         <button
           className="eye-btn"
+          type="button"
+          tabIndex={-1}
           onClick={(e) => {
             e.preventDefault();
 
@@ -41,7 +43,7 @@ export default function InputMail({
             }
           }}
         >
-          <i class="bi bi-eye-slash-fill" ref={iconRef}></i>
+          <i className="bi bi-eye-slash-fill" ref={iconRef}></i>
         </button>
       </div>
     );

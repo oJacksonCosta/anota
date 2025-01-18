@@ -26,15 +26,12 @@ input:focus {
   border-radius: 0.5rem;
   cursor: pointer;
   display: block;
+  outline: none;
   padding: 0 0.2rem;
   position: absolute;
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.eye-btn:focus {
-  outline: 2px solid var(--blue);
 }
 
 .eye-btn > i {

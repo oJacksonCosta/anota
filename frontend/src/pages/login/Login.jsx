@@ -10,22 +10,19 @@ export default function Login() {
   return (
     <Background>
       <Container>
-        children=
-        {
-          <>
-            <Logo />
-            <p>Entre e anote suas ideias, do seu jeito!</p>
-            <Form2 />
-            <p style={{ marginTop: "2rem" }}>
-              Ainda não tem uma conta?{" "}
-              <Link id="link-to" to="/register">
-                Cadastre-se
-              </Link>
-              .
-            </p>
-            <Copyright />
-          </>
-        }
+        <>
+          <Logo />
+          <p>Entre e anote suas ideias, do seu jeito!</p>
+          <Form2 />
+          <p style={{ marginTop: "2rem" }}>
+            Ainda não tem uma conta?{" "}
+            <Link id="link-to" to="/register">
+              Cadastre-se
+            </Link>
+            .
+          </p>
+          <Copyright />
+        </>
       </Container>
     </Background>
   );

@@ -9,23 +9,21 @@ import Container from "../../components/container/Container";
 export default function Register() {
   return (
     <Background>
-      <Container
-        children={
-          <>
-            <Logo />
-            <p>Cadastre-se para poder criar suas notas!</p>
-            <Form1 />
-            <p style={{ marginTop: "2rem" }}>
-              Já tem uma conta?{" "}
-              <Link id="link-to" to="/login">
-                Login
-              </Link>
-              .
-            </p>
-            <Copyright />
-          </>
-        }
-      ></Container>
+      <Container>
+        <>
+          <Logo />
+          <p>Cadastre-se para poder criar suas notas!</p>
+          <Form1 />
+          <p style={{ marginTop: "2rem" }}>
+            Já tem uma conta?{" "}
+            <Link id="link-to" to="/login">
+              Login
+            </Link>
+            .
+          </p>
+          <Copyright />
+        </>
+      </Container>
     </Background>
   );
 }
