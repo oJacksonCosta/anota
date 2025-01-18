@@ -1,4 +1,8 @@
 .form-1 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   min-width: 350px;
+  position: relative;
   width: 60%;
 }

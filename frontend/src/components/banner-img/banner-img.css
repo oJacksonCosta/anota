@@ -13,7 +13,7 @@
 #img-description {
   background-color: var(--blue);
   border-radius: 0.3rem;
-  bottom: 0.1rem;
+  bottom: 0;
   color: var(--white);
   font-size: 0.6rem;
   font-weight: 500;

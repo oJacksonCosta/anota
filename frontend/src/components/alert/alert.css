@@ -1,11 +1,11 @@
 .alert-success,
 .alert-error {
+  width: fit-content;
+  height: fit-content;
   border-radius: 0.8rem;
   padding: 0.8rem 1.2rem;
-  position: fixed;
-  top: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  position: absolute;
+  bottom: 0;
   z-index: 1000;
 }
 
@@ -13,10 +13,15 @@
   background-color: #d4edda;
 }
 
+.alert-success > p,
+.alert-error > p {
+  margin: 0;
+  text-align: center;
+}
+
 .alert-success > p {
   color: #155724;
   font-weight: 500;
-  margin: 0;
 }
 
 .alert-error {
@@ -26,43 +31,44 @@
 .alert-error > p {
   color: #ff0019;
   font-weight: 500;
-  margin: 0;
 }
 
 .show {
+  display: block;
   animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .hide {
+  display: none;
   animation: fadeOut 0.5s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    top: 0;
+    bottom: 0;
   }
   60% {
     opacity: 0.5;
-    top: 2rem;
+    bottom: -4rem;
   }
   100% {
     opacity: 1;
-    top: 1.5rem;
+    bottom: -3.6rem;
   }
 }
 
 @keyframes fadeOut {
   0% {
     opacity: 1;
-    top: 1.5rem;
+    bottom: -3.6rem;
   }
   60% {
     opacity: 0.5;
-    top: 2rem;
+    bottom: -4rem;
   }
   100% {
     opacity: 0;
-    top: 0;
+    bottom: 0;
   }
 }

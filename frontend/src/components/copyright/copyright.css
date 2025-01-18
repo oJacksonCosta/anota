@@ -1,0 +1,10 @@
+.copyright {
+  bottom: 1.5rem;
+  font-size: 0.8rem;
+  position: absolute;
+}
+
+.copyright > span {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
