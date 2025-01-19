@@ -1,4 +1,11 @@
-input {
+.input-container {
+  height: 2.8rem;
+  margin-bottom: 0.8rem;
+  position: relative;
+  width: 100%;
+}
+
+.input-container input {
   background-color: var(--white-transparent);
   border: none;
   border-radius: 0.6rem;
@@ -8,16 +15,9 @@ input {
   padding-inline: 1rem;
 }
 
-input:focus {
+.input-container input:focus {
   font-weight: 500;
   outline: 2px solid var(--blue);
-}
-
-.input-container {
-  height: 2.8rem;
-  margin-bottom: 0.8rem;
-  position: relative;
-  width: 100%;
 }
 
 .eye-btn {
@@ -34,7 +34,7 @@ input:focus {
   transform: translateY(-50%);
 }
 
-.eye-btn > i {
+.eye-btn i {
   color: #a3a3a3;
   font-size: 1.2rem;
 }

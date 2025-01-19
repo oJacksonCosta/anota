@@ -18,7 +18,13 @@ export default function Form2() {
 
   const [time, setTime] = useState(3000);
 
+  const [isChecked, setIsChecked] = useState(false);
+
   const navigate = useNavigate();
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,9 +49,16 @@ export default function Form2() {
     setIsLoading(true);
 
     if (result.status) {
-      setAlertMessage("Usuário registrado com sucesso!");
+      setAlertMessage("Login realizado com sucesso!");
       setAlertType("success");
       setShowAlert(true);
+
+      //Salva o id do usuário no localStorage ou sessionStorage
+      if (isChecked) {
+        localStorage.setItem("userId", result.userId);
+      } else {
+        sessionStorage.setItem("userId", result.userId);
+      }
 
       // Limpa os campos
       setEmail("");
@@ -99,6 +112,15 @@ export default function Form2() {
           onClose={closeAlert}
           time={time}
         />
+      </div>
+      <div className="remember-me">
+        <input
+          type="checkbox"
+          id="remember-me"
+          value={isChecked}
+          onChange={handleCheckboxChange}
+        />
+        <label htmlFor="remember-me">Lembrar-me</label>
       </div>
     </form>
   );

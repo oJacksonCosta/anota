@@ -89,6 +89,9 @@ export const loginUser = async (email, password) => {
 
     ret.status = true;
     ret.errorMessage = "";
+    ret.userId = user.uid;
+
+    console.log(ret);
   } catch (err) {
     switch (err.code) {
       case "auth/invalid-email":
