@@ -1,0 +1,4 @@
+-> Reduzir a altura dos cards
+-> Remover o botão de opções
+-> Colocar SVG caso não tenha nenhuma nota
+-> Criar uma animação para o botão check aumentar e aparecer o texto
