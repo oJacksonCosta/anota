@@ -57,15 +57,15 @@
 .show {
   display: block;
   pointer-events: auto;
-  animation: fadeIn 0.5s ease-in-out forwards;
+  animation: start 0.5s ease-in-out forwards;
 }
 
 .hide {
   pointer-events: none;
-  animation: fadeOut 0.5s ease-in-out forwards;
+  animation: end 0.5s ease-in-out forwards;
 }
 
-@keyframes fadeIn {
+@keyframes start {
   0% {
     opacity: 0;
     top: 0;
@@ -80,7 +80,7 @@
   }
 }
 
-@keyframes fadeOut {
+@keyframes end {
   0% {
     opacity: 1;
     top: 1rem;

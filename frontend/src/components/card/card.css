@@ -10,7 +10,7 @@
 }
 
 .card:hover {
-  cursor: pointer;
+  cursor: zoom-in;
   transform: scale(1.015);
   transition: 0.2s;
 }
