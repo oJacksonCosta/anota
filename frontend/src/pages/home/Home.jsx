@@ -3,10 +3,17 @@ import Caption from "../../components/caption/Caption";
 import Background from "../../components/background/Background";
 import InputSelect from "../../components/input-select/Input-select";
 import Search from "../../components/search/Search";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Card from "../../components/card/Card";
+import { getNotes } from "../../../../firebase/notes";
 
 export default function Home() {
+  const cardContainer = useRef(null);
+
+  const [notes, setNotes] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState([]);
+  const [userId, setUserId] = useState("");
+
   const [selectValues, setSelectValues] = useState({
     selectType: "",
     selectPriority: "",
@@ -17,7 +24,6 @@ export default function Home() {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
-    return searchTerm;
   };
 
   const typeOptions = [
@@ -34,19 +40,101 @@ export default function Home() {
   const statusOptions = [
     { value: "all", label: "Todas" },
     { value: "todo", label: "Pendente" },
-    { value: "done", label: "Concluído" },
+    { value: "concluded", label: "Concluído" },
   ];
+
+  useEffect(() => {});
 
   const handleSelectChange = (key, value) => {
     setSelectValues((prevValues) => {
-      const selectValues = {
+      const updatedValues = {
         ...prevValues,
         [key]: value,
       };
-      console.log(selectValues);
-      return selectValues;
+      return updatedValues;
     });
   };
+
+  // Pega o ID do usuário do localStorage ou sessionStorage
+  useEffect(() => {
+    let id = localStorage.getItem("userId");
+
+    if (!id) {
+      id = sessionStorage.getItem("userId");
+    }
+
+    if (id) {
+      setUserId(id);
+    } else {
+      window.location.href = "/login";
+    }
+  }, []);
+
+  // Obtém todas as notas do usuário
+  const listCards = async () => {
+    const response = await getNotes(userId);
+    if (response?.status) {
+      setNotes(response.notes);
+    } else {
+      console.error(
+        "Erro ao obter notas:",
+        response?.errorMessage || "Resposta inválida."
+      );
+    }
+  };
+
+  const onTaskConcluded = () => {
+    listCards();
+  };
+
+  // Aplica os filtros (tipo, prioridade, status, e pesquisa)
+  const applyFilters = () => {
+    let filtered = notes;
+
+    // Filtra pelo tipo
+    if (selectValues.selectType && selectValues.selectType !== "all") {
+      filtered = filtered.filter(
+        (note) => note.type === selectValues.selectType
+      );
+    }
+
+    // Filtra pela prioridade
+    if (selectValues.selectPriority && selectValues.selectPriority !== "all") {
+      filtered = filtered.filter(
+        (note) => note.priority === selectValues.selectPriority
+      );
+    }
+
+    // Filtra pelo status
+    if (selectValues.selectStatus && selectValues.selectStatus !== "all") {
+      filtered = filtered.filter(
+        (note) => note.status === selectValues.selectStatus
+      );
+    }
+
+    // Filtra pelo termo de pesquisa
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (note) =>
+          note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          note.content.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredNotes(filtered);
+  };
+
+  // Chama a função listCards quando o componente é montado ou quando userId muda
+  useEffect(() => {
+    if (userId) {
+      listCards();
+    }
+  }, [userId]);
+
+  // Chama a função applyFilters sempre que notes, selectValues ou searchTerm mudarem
+  useEffect(() => {
+    applyFilters();
+  }, [notes, selectValues, searchTerm]);
 
   return (
     <Background>
@@ -74,37 +162,20 @@ export default function Home() {
           <Search onSearch={(value) => handleSearch(value)} />
         </div>
 
-        <div className="cards-container">
-          <Card
-            title={"Teste de título"}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
-            priority={"medium"}
-            status={"todo"}
-            type={"task"}
-            date={"19/01/2025"}
-          />
-          <Card
-            title={"Teste de título"}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
-            priority={"high"}
-            status={"complete"}
-            type={"task"}
-            date={"20/01/2025"}
-          />
-          <Card
-            title={"Teste de título"}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
-            priority={""}
-            status={""}
-            type={"note"}
-            date={"20/01/2025"}
-          />
+        <div className="cards-container" ref={cardContainer}>
+          {filteredNotes.map((note) => (
+            <Card
+              key={note.id}
+              id={note.id}
+              title={note.title}
+              content={note.content}
+              priority={note.priority}
+              status={note.status}
+              type={note.type}
+              date={note.date}
+              onTaskConcluded={onTaskConcluded}
+            />
+          ))}
         </div>
       </div>
     </Background>

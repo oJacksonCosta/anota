@@ -101,8 +101,13 @@ export const loginUser = async (email, password) => {
         break;
       case "auth/invalid-credential":
         ret.status = false;
-        ret.errorMessage = "Senha inválida.";
+        ret.errorMessage = "Credenciais inválidas.";
 
+        break;
+
+      case "auth/too-many-requests":
+        ret.status = false;
+        ret.errorMessage = "Muitas tentativas. Tente novamente mais tarde.";
         break;
 
       default:

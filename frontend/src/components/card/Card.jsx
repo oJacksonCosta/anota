@@ -1,5 +1,6 @@
 import "./card.css";
 import { useState, useEffect, useRef } from "react";
+import { deleteNote, concludeTask } from "../../../../firebase/notes";
 
 export default function Card({
   id,
@@ -9,15 +10,14 @@ export default function Card({
   status,
   type,
   date,
+  onTaskConcluded,
 }) {
   const [priorityColor, setPriorityColor] = useState("");
   const [typeIcon, setTypeIcon] = useState("");
   const [noteType, setNoteType] = useState("");
   const [checkBtnVisibility, setCheckBtnVisibility] = useState("hide");
-  const [modalOptionsIsShow, setModalOptionsIsShow] = useState(false);
 
-  const modalOptionsRef = useRef(null);
-  const btnOptionsRef = useRef(null);
+  const concludedIconRef = useRef(null);
 
   useEffect(() => {
     switch (priority) {
@@ -67,45 +67,36 @@ export default function Card({
   useEffect(() => {
     if (status === "todo" && type === "task") {
       setCheckBtnVisibility("show");
+      concludedIconRef.current.style.display = "none";
+    } else if (status === "concluded" && type === "task") {
+      setCheckBtnVisibility("hide");
+      concludedIconRef.current.style.display = "block";
     } else {
       setCheckBtnVisibility("hide");
+      concludedIconRef.current.style.display = "none";
     }
   }, [status]);
 
-  const handleOptions = () => {
-    if (modalOptionsIsShow) {
-      modalOptionsRef.current.classList.remove("hide");
-      modalOptionsRef.current.classList.add("show");
-      setModalOptionsIsShow(false);
+  const handleConcludeTask = async () => {
+    const response = await concludeTask(id);
+    if (response?.status) {
+      onTaskConcluded();
     } else {
-      setModalOptionsIsShow(true);
-      modalOptionsRef.current.classList.remove("show");
-      modalOptionsRef.current.classList.add("hide");
+      console.error(
+        "Erro ao concluir tarefa:",
+        response?.errorMessage || "Resposta inválida."
+      );
     }
   };
 
   return (
     <div className="card">
-      <button
-        className="btn-options"
-        type="button"
-        onClick={handleOptions}
-        ref={btnOptionsRef}
-      >
-        <i className="bi bi-three-dots-vertical"></i>
-      </button>
-
-      <div
-        className={`options-modal ${modalOptionsIsShow}`}
-        ref={modalOptionsRef}
-      >
-        <button>
+      <div className="options">
+        <button className="edit" type="button" tabIndex={-1}>
           <i className="bi bi-pencil-fill"></i>
-          Editar
         </button>
-        <button>
+        <button className="delete" type="button" tabIndex={-1}>
           <i className="bi bi-trash-fill"></i>
-          Excluir
         </button>
       </div>
 
@@ -125,9 +116,17 @@ export default function Card({
             {noteType}
           </p>
 
-          <button className={`check-btn-${checkBtnVisibility}`} type="button">
-            <i className="bi bi-check"></i>
+          <i className="bi bi-check-all" ref={concludedIconRef}></i>
+
+          <button
+            className={`check-btn-${checkBtnVisibility}`}
+            type="button"
+            onClick={handleConcludeTask}
+          >
+            Concluir
           </button>
+
+          <div className="note-modal"></div>
         </div>
       </div>
     </div>

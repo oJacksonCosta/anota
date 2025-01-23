@@ -133,6 +133,7 @@ export const getNotes = async (userId) => {
         priority: doc.data().priority,
         status: doc.data().status,
         content: doc.data().content,
+        date: doc.data().date,
       });
     });
 
@@ -147,4 +148,6 @@ export const getNotes = async (userId) => {
     ret.errorMessage = "Erro ao obter as notas: " + error;
     ret.notes = [];
   }
+
+  return ret;
 };
