@@ -9,42 +9,87 @@
   width: 100%;
 }
 
-.card-open {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-}
-
 .card:hover {
-  cursor: zoom-in;
   transform: scale(1.015);
   transition: 0.2s;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
 }
 
 .options {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
-  position: absolute;
-  right: 2rem;
+  gap: 0.4rem;
 }
 
 .edit,
-.delete {
+.delete,
+.open-task,
+.expand,
+.save-update {
   background-color: transparent;
   border: none;
   color: #ffffff80;
   cursor: pointer;
+  display: flex;
+  height: 1.8rem;
+  width: 1.8rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  transition: background-color 0.3s;
 }
 
-.edit:hover {
-  color: var(--blue);
-  transition: 0.3s;
+.edit:disabled,
+.delete:disabled,
+.open-task:disabled,
+.expand:disabled,
+.save-update:disabled {
+  cursor: not-allowed;
+  color: #ffffff38;
+}
+.edit:disabled:hover,
+.delete:disabled:hover,
+.open-task:disabled:hover,
+.expand:disabled:hover,
+.save-update:disabled:hover {
+  color: #ffffff38;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.delete {
+  position: relative;
+}
+
+.save-update {
+  display: none;
+}
+
+.open-task i {
+  font-size: 1.2rem;
 }
 
 .delete:hover {
-  color: var(--red);
+  background-color: var(--red);
+  color: var(--white);
+  transition: 0.3s;
+}
+
+.edit:hover,
+.open-task:hover,
+.expand:hover,
+.save-update:hover {
+  color: var(--white);
+  background-color: var(--blue);
   transition: 0.3s;
 }
 
@@ -70,11 +115,16 @@
   background-color: var(--blue);
 }
 
-.card h2 {
+hr {
+  border: 1px solid #ffffff17;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.title {
   color: var(--white);
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 70%;
@@ -84,14 +134,18 @@
 .content {
   color: var(--white);
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   word-wrap: break-word;
   hyphens: auto;
 
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
+}
+
+.content-modal {
+  display: block;
 }
 
 .card-footer {
@@ -103,13 +157,13 @@
   width: 100%;
 }
 
-.card-footer i {
+.card-footer-icon {
   font-size: 0.8rem;
   margin-right: 0.3rem;
 }
 
 .date {
-  color: var(--white);
+  color: #ffffff80;
   font-size: 0.8rem;
   font-weight: 500;
   height: fit-content;
@@ -135,12 +189,11 @@
 }
 
 .card-type > i {
-  border: 2px solid var(--white-transparent);
   border-radius: 0.5rem;
   color: var(--blue);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0;
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   padding-inline: 0.3rem;
 }
 
@@ -160,12 +213,96 @@
   font-weight: 400;
   height: 1.5rem;
   justify-content: center;
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   overflow: hidden;
   padding-inline: 0.6rem;
-  transition: width 0.6s, background-color 0.6s;
+  transition: background-color 0.3s;
 }
 
 .check-btn-show:hover {
   background-color: var(--blue-hover);
+}
+
+.check-btn-show:disabled {
+  background-color: #ffffff38;
+  cursor: not-allowed;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: none;
+  pointer-events: none;
+}
+
+.overlay.active {
+  display: block;
+  pointer-events: all;
+}
+
+.delete-modal {
+  display: none;
+  border-radius: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  outline: 1px solid var(--blue);
+  gap: 0.5rem;
+  background-color: #212134;
+  box-shadow: 0 0.4rem 0.6rem #0000004b;
+  width: 15rem;
+  padding: 1rem 1rem;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.delete-modal.active {
+  display: flex;
+}
+
+.delete-modal > p {
+  color: var(--white);
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0;
+}
+
+.confirm-btns {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.delete-modal button {
+  border: none;
+  border-radius: 0.4rem;
+  background-color: var(--white-transparent);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem 0;
+  width: 35%;
+}
+
+#yes:hover {
+  background-color: var(--red);
+  color: var(--white);
+  transition: 0.3s;
+}
+
+#no:hover {
+  background-color: var(--blue);
+  color: var(--white);
+  transition: 0.3s;
 }

@@ -14,7 +14,7 @@ export default function Register() {
           <Logo />
           <p>Cadastre-se para poder criar suas notas!</p>
           <Form1 />
-          <p style={{ marginTop: "2rem" }}>
+          <p style={{ marginTop: "1rem" }}>
             Já tem uma conta?{" "}
             <Link id="link-to" to="/login">
               Login

@@ -14,7 +14,7 @@ export default function Login() {
           <Logo />
           <p>Entre e anote suas ideias, do seu jeito!</p>
           <Form2 />
-          <p style={{ marginTop: "2rem" }}>
+          <p style={{ marginTop: "1.5rem" }}>
             Ainda não tem uma conta?{" "}
             <Link id="link-to" to="/register">
               Cadastre-se

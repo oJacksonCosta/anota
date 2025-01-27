@@ -6,9 +6,11 @@ import Search from "../../components/search/Search";
 import { useRef, useState, useEffect } from "react";
 import Card from "../../components/card/Card";
 import { getNotes } from "../../../../firebase/notes";
+import AddBtn from "../../components/add-btn/Add-btn";
 
 export default function Home() {
   const cardContainer = useRef(null);
+  const homeContainerRef = useRef(null);
 
   const [notes, setNotes] = useState([]);
   const [filteredNotes, setFilteredNotes] = useState([]);
@@ -83,7 +85,7 @@ export default function Home() {
     }
   };
 
-  const onTaskConcluded = () => {
+  const onRefreshList = () => {
     listCards();
   };
 
@@ -138,7 +140,7 @@ export default function Home() {
 
   return (
     <Background>
-      <div className="home-container">
+      <div className="home-container" ref={homeContainerRef}>
         <Caption />
         <div className="filter">
           <InputSelect
@@ -173,10 +175,12 @@ export default function Home() {
               status={note.status}
               type={note.type}
               date={note.date}
-              onTaskConcluded={onTaskConcluded}
+              onRefreshList={onRefreshList}
             />
           ))}
         </div>
+
+        <AddBtn />
       </div>
     </Background>
   );

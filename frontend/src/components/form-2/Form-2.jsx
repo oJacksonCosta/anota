@@ -56,8 +56,10 @@ export default function Form2() {
       //Salva o id do usuário no localStorage ou sessionStorage
       if (isChecked) {
         localStorage.setItem("userId", result.userId);
+        sessionStorage.removeItem("userId");
       } else {
         sessionStorage.setItem("userId", result.userId);
+        localStorage.removeItem("userId");
       }
 
       // Limpa os campos
@@ -89,6 +91,7 @@ export default function Form2() {
         width="100%"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        margin="0 0 0.8rem 0"
       />
       <Input
         type="password"
@@ -96,6 +99,7 @@ export default function Form2() {
         width="100%"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        margin="0.8rem"
       />
       <Button1
         text="Login"

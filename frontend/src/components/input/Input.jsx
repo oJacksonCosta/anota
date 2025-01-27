@@ -2,13 +2,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useRef } from "react";
 import "./input.css";
 
-export default function InputMail({
-  type,
-  placeholder,
-  value,
-  width,
-  onChange,
-}) {
+export default function Input({ type, placeholder, value, width, onChange }) {
   const inputRef = useRef(null);
   const iconRef = useRef(null);
 

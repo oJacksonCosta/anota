@@ -20,6 +20,10 @@
   font-size: 16px;
   font-weight: 200;
   scroll-behavior: smooth;
+
+  [contenteditable="true"] {
+    outline: none;
+  }
 }
 
 body {

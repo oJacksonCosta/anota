@@ -1,0 +1,23 @@
+.textarea {
+  background-color: var(--white-transparent);
+  border: none;
+  border-radius: 0.6rem;
+  color: var(--white);
+  font-size: 1rem;
+  flex: 1;
+  padding: 0.7rem 1rem;
+  resize: none;
+
+  /* Remover a barra de rolagem */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge Legacy */
+}
+
+.textarea::-webkit-scrollbar {
+  display: none; /* Chrome, Safari e Opera */
+}
+
+.textarea:focus {
+  font-weight: 500;
+  outline: 2px solid var(--blue);
+}

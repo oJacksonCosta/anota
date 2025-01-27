@@ -84,6 +84,7 @@ export default function Form1() {
         width="100%"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        margin="0 0 0.8rem 0"
       />
       <Input
         type="password"
@@ -91,6 +92,7 @@ export default function Form1() {
         width="100%"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        margin="0 0 0.8rem 0"
       />
       <Input
         type="password"
@@ -98,6 +100,7 @@ export default function Form1() {
         width="100%"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
+        margin="0 0 0.8rem 0"
       />
       <Button1
         text="Cadastrar"

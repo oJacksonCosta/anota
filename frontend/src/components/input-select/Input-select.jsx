@@ -1,7 +1,17 @@
 import Select from "react-select";
 
-export default function InputSelect({ options, onChange, placeholder, value }) {
+export default function InputSelect({
+  options,
+  onChange,
+  placeholder,
+  value,
+  width = "100%",
+}) {
   const customStyles = {
+    container: (base) => ({
+      ...base,
+      width: width,
+    }),
     control: (base, { isFocused }) => ({
       ...base,
       backgroundColor: "var(--white-transparent)",
