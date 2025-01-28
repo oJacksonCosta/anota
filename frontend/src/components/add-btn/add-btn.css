@@ -73,10 +73,11 @@
   bottom: 4rem;
   right: 9.5rem;
 
+  transition: transform 0.3s ease, opacity 0.3s ease;
   transform-origin: bottom right;
 }
 
-.show-modal {
+.add-note-modal.open {
   visibility: visible;
   animation: modalfadeIn 0.4s ease-in-out forwards;
   pointer-events: all;

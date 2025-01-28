@@ -7,6 +7,8 @@ import Textarea from "../textarea/Textarea";
 
 export default function AddBtn() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   const typeOptions = [
     { value: "task", label: "Tarefa" },
@@ -23,27 +25,24 @@ export default function AddBtn() {
 
   const openModal = () => {
     setModalOpen(!modalOpen);
-    if (modalOpen) {
-      if (modalAddNoteRef) {
-        // Define a opacidade dos filhos para 0
-        Array.from(modalAddNoteRef.current.children).forEach((child) => {
-          child.style.opacity = "0";
-        });
-      }
-    } else {
-      // Define a opacidade dos filhos para 1
-      Array.from(modalAddNoteRef.current.children).forEach((child) => {
-        child.style.opacity = "1";
-      });
-    }
+    modalAddNoteRef.current.classList.toggle("open");
+  };
+
+  //Função para criar uma nova anotação
+  const handleAddNote = () => {
+    // const response = await addNote(title, content);
+    // if (response?.status) {
+    //   setModalOpen(false);
+    //   setTitle("");
+    //   setContent("");
+    // }
+
+    console.log(title, content);
   };
 
   return (
     <>
-      <div
-        className={`add-note-modal ${modalOpen ? "show-modal" : "hide-modal"}`}
-        ref={modalAddNoteRef}
-      >
+      <div className={"add-note-modal"} ref={modalAddNoteRef}>
         <p className="form-msg">Boa! Bora criar uma anotação!</p>
 
         <div className="selects">
@@ -51,11 +50,25 @@ export default function AddBtn() {
           <InputSelect placeholder="Prioridade" options={priorityOptions} />
         </div>
 
-        <Input type="text" placeholder="Título" width={"100%"} />
+        <Input
+          type="text"
+          placeholder="Título"
+          width={"100%"}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-        <Textarea placeholder="Conteúdo" width={"100%"} />
+        <Textarea
+          placeholder="Conteúdo"
+          width={"100%"}
+          onChange={(e) => setContent(e.target.value)}
+        />
 
-        <Button text={"Adicionar"} width={"100%"} />
+        <Button
+          text={"Adicionar"}
+          width={"100%"}
+          type={"button"}
+          onClick={handleAddNote}
+        />
       </div>
 
       <button className="add-btn" onClick={openModal}>
