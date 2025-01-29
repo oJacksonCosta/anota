@@ -100,7 +100,7 @@ export default function AddBtn({ onRefreshList }) {
         setModalOpen(false);
         modalAddNoteRef.current.classList.toggle("open");
         iconRef.current.classList.toggle("rotate");
-      }, 2000);
+      }, 1000);
     } else {
       setIsLoading(false);
       msgRef.current.innerHTML = "🙁 Ops! Algo deu errado. Tente novamente.";
@@ -126,6 +126,7 @@ export default function AddBtn({ onRefreshList }) {
             options={priorityOptions}
             onChange={(value) => handleSelectChange("selectPriority", value)}
             value={selectValues.selectPriority}
+            isDesabled={selectValues.selectType === 'note'}
           />
         </div>
 

@@ -6,6 +6,7 @@ export default function InputSelect({
   placeholder,
   value,
   width = "100%",
+  isDesabled
 }) {
   const customStyles = {
     container: (base) => ({
@@ -18,15 +19,15 @@ export default function InputSelect({
       border: "none",
       borderRadius: "0.6rem",
       color: "var(--white)",
-      cursor: "pointer",
+      cursor: isDesabled ? "not-allowed" : "pointer",
       height: "2.8rem",
       boxShadow: "none",
       paddingInline: "0.2rem",
-      outline: isFocused ? "2px solid var(--blue)" : "none",
+      outline: isDesabled ? "none" : isFocused ? "2px solid var(--blue)" : "none",
     }),
     dropdownIndicator: (base, { isFocused }) => ({
       ...base,
-      color: isFocused ? "var(--blue)" : "#ffffff80",
+      color: isDesabled ? "#ffffff80" : isFocused ? "var(--blue)" : "#ffffff80",
     }),
     indicatorSeparator: () => ({
       display: "none",
@@ -46,6 +47,7 @@ export default function InputSelect({
       outline: "1px solid var(--blue)",
       boxShadow: "0 0.4rem 0.6rem #0000004b",
       padding: "0.5rem",
+      display: isDesabled ? "none" : "block"
     }),
     option: (base, { isFocused }) => ({
       ...base,
@@ -55,12 +57,7 @@ export default function InputSelect({
       borderRadius: "0.4rem",
       color: "var(--white)",
     }),
-    disabled: (base) => ({
-      ...base,
-      backgroundColor: "transparent",
-      color: "#ffffff80",
-      cursor: "not-allowed",
-    }),
+    
   };
 
   const handleChange = (selectedOption) => {
