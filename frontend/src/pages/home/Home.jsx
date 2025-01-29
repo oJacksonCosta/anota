@@ -180,7 +180,7 @@ export default function Home() {
           ))}
         </div>
 
-        <AddBtn />
+        <AddBtn onRefreshList={onRefreshList} />
       </div>
     </Background>
   );

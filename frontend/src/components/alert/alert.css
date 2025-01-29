@@ -72,22 +72,22 @@
   }
   60% {
     opacity: 0.5;
-    top: 1.5rem;
+    top: 1.2rem;
   }
   100% {
     opacity: 1;
-    top: 1rem;
+    top: 0.6rem;
   }
 }
 
 @keyframes end {
   0% {
     opacity: 1;
-    top: 1rem;
+    top: 0.6rem;
   }
   60% {
     opacity: 0.5;
-    top: 1.5rem;
+    top: 1.2rem;
   }
   100% {
     opacity: 0;

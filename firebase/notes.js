@@ -14,24 +14,20 @@ import {
 } from "firebase/firestore";
 
 // Cria uma nova nota
-export const createNote = async (
-  title,
-  type,
-  priority,
-  status,
-  content,
-  userId
-) => {
+export const createNote = async (title, type, priority, content, userId) => {
   let ret = {
     status: false,
     errorMessage: "",
   };
 
+  const status = type === "task" ? "todo" : "";
+  const priorityValue = type === "task" ? priority : "";
+
   try {
     const docRef = await addDoc(collection(db, "notes"), {
       title: title,
       type: type,
-      priority: priority,
+      priority: priorityValue,
       status: status,
       content: content,
       userId: userId,
@@ -47,6 +43,8 @@ export const createNote = async (
     ret.status = false;
     ret.errorMessage = "Erro ao adicionar a nota: " + err;
   }
+
+  return ret;
 };
 
 // Deleta uma nota

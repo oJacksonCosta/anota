@@ -55,6 +55,12 @@ export default function InputSelect({
       borderRadius: "0.4rem",
       color: "var(--white)",
     }),
+    disabled: (base) => ({
+      ...base,
+      backgroundColor: "transparent",
+      color: "#ffffff80",
+      cursor: "not-allowed",
+    }),
   };
 
   const handleChange = (selectedOption) => {
