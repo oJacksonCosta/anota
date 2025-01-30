@@ -5,7 +5,7 @@ import InputSelect from "../../components/input-select/Input-select";
 import Search from "../../components/search/Search";
 import { useRef, useState, useEffect } from "react";
 import Card from "../../components/card/Card";
-import { getNotes } from "../../../../firebase/notes";
+import { getNotes } from "../../../firebase/notes";
 import AddBtn from "../../components/add-btn/Add-btn";
 import LogoutBtn from "../../components/logout-btn/Logout";
 

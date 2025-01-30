@@ -2,7 +2,7 @@ import "./form-1.css";
 import Input from "../input/Input";
 import Button1 from "../button-1/Button-1";
 import { useState } from "react";
-import { registerUser } from "../../../../firebase/users";
+import { registerUser } from "../../../firebase/users";
 import { useNavigate } from "react-router-dom";
 import Alert from "../alert/Alert";
 

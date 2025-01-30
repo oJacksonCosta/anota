@@ -1,7 +1,7 @@
 import "./form-2.css";
 import Input from "../input/Input";
 import Button1 from "../button-1/Button-1";
-import { loginUser } from "../../../../firebase/users";
+import { loginUser } from "../../../firebase/users";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../alert/Alert";

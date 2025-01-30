@@ -4,7 +4,7 @@ import Input from "../input/Input";
 import InputSelect from "../input-select/Input-select";
 import Button from "../button-1/Button-1";
 import Textarea from "../textarea/Textarea";
-import { createNote } from "../../../../firebase/notes";
+import { createNote } from "../../../firebase/notes";
 
 export default function AddBtn({ onRefreshList }) {
   const [modalOpen, setModalOpen] = useState(false);

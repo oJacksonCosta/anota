@@ -4,8 +4,8 @@ import {
   deleteNote,
   concludeTask,
   reopenTask,
-} from "../../../../firebase/notes";
-import { updateNote } from "../../../../firebase/notes";
+  updateNote
+} from "../../../firebase/notes";
 
 export default function Card({
   id,
