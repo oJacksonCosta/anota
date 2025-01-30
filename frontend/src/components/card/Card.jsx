@@ -187,7 +187,9 @@ export default function Card({
   const handleDeleteNote = async () => {
     const response = await deleteNote(id);
     if (response?.status) {
-      onRefreshList();
+      setTimeout(() => {
+        onRefreshList();
+      }, 100);
     } else {
       console.error("Erro ao excluir nota:", response?.errorMessage);
     }
@@ -200,10 +202,8 @@ export default function Card({
   useEffect(() => {
     if (isShowModalConfirm) {
       modalConfirmRef.current.classList.add("active");
-      document.body.style.overflow = "hidden";
     } else {
       modalConfirmRef.current.classList.remove("active");
-      document.body.style.overflow = "auto";
     }
   }, [isShowModalConfirm]);
 

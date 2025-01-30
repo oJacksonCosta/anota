@@ -79,7 +79,9 @@ export default function Home() {
       setNotes(response.notes);
       console.log(response.notes.length);
       if (response.notes.length <= 0) {
-        emptyListRef.current.classList.add("show");
+        setTimeout(() => {
+          emptyListRef.current.classList.add("show");
+        }, 200);
       } else {
         emptyListRef.current.classList.remove("show");
       }
@@ -170,7 +172,7 @@ export default function Home() {
         <div className="cards-container" ref={cardContainer}>
           <div className="empty-list" ref={emptyListRef}>
             <i className="bi bi-sticky"></i>
-            <p>Você ainda não tem nenhuma nota...</p>
+            <p>Você não tem nenhuma nota...</p>
           </div>
 
           {filteredNotes.map((note) => (
