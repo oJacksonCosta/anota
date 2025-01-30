@@ -83,7 +83,7 @@ export default function AddBtn({ onRefreshList }) {
       newNote.content,
       newNote.userId
     );
-    console.log(response);
+    //console.log(response);
 
     if (response) {
       onRefreshList();

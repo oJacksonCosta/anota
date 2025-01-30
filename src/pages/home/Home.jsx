@@ -77,7 +77,7 @@ export default function Home() {
     const response = await getNotes(userId);
     if (response?.status) {
       setNotes(response.notes);
-      console.log(response.notes.length);
+      //console.log(response.notes.length);
       if (response.notes.length <= 0) {
         setTimeout(() => {
           emptyListRef.current.classList.add("show");
