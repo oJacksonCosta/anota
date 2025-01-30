@@ -14,6 +14,12 @@
   padding-inline: 1rem;
 }
 
+.input-container input::placeholder {
+  color: #a3a3a3;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
 .input-container input:focus {
   font-weight: 500;
   outline: 2px solid var(--blue);

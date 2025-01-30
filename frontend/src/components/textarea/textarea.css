@@ -21,3 +21,9 @@
   font-weight: 500;
   outline: 2px solid var(--blue);
 }
+
+textarea::placeholder {
+  color: #a3a3a3;
+  font-size: 1rem;
+  font-weight: 200;
+}

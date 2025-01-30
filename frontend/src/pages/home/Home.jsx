@@ -7,10 +7,12 @@ import { useRef, useState, useEffect } from "react";
 import Card from "../../components/card/Card";
 import { getNotes } from "../../../../firebase/notes";
 import AddBtn from "../../components/add-btn/Add-btn";
+import LogoutBtn from "../../components/logout-btn/Logout";
 
 export default function Home() {
   const cardContainer = useRef(null);
   const homeContainerRef = useRef(null);
+  const emptyListRef = useRef(null);
 
   const [notes, setNotes] = useState([]);
   const [filteredNotes, setFilteredNotes] = useState([]);
@@ -45,8 +47,6 @@ export default function Home() {
     { value: "concluded", label: "Concluído" },
   ];
 
-  useEffect(() => {});
-
   const handleSelectChange = (key, value) => {
     setSelectValues((prevValues) => {
       const updatedValues = {
@@ -77,11 +77,14 @@ export default function Home() {
     const response = await getNotes(userId);
     if (response?.status) {
       setNotes(response.notes);
+      console.log(response.notes.length);
+      if (response.notes.length <= 0) {
+        emptyListRef.current.classList.add("show");
+      } else {
+        emptyListRef.current.classList.remove("show");
+      }
     } else {
-      console.error(
-        "Erro ao obter notas:",
-        response?.errorMessage || "Resposta inválida."
-      );
+      window.alert(`Erro ao buscar as notas: ${response.errorMessage}`);
     }
   };
 
@@ -165,6 +168,11 @@ export default function Home() {
         </div>
 
         <div className="cards-container" ref={cardContainer}>
+          <div className="empty-list" ref={emptyListRef}>
+            <i className="bi bi-sticky"></i>
+            <p>Você ainda não tem nenhuma nota...</p>
+          </div>
+
           {filteredNotes.map((note) => (
             <Card
               key={note.id}
@@ -181,6 +189,8 @@ export default function Home() {
         </div>
 
         <AddBtn onRefreshList={onRefreshList} />
+
+        <LogoutBtn />
       </div>
     </Background>
   );

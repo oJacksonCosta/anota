@@ -94,18 +94,39 @@ export default function AddBtn({ onRefreshList }) {
         selectPriority: "",
       });
       setIsLoading(false);
-      msgRef.current.innerHTML = "👏 Perfeito! Anotação criada com sucesso!";
+      msgRef.current.innerHTML = "👏 Perfeito! Registrado com sucesso!";
 
       setTimeout(() => {
-        setModalOpen(false);
-        modalAddNoteRef.current.classList.toggle("open");
-        iconRef.current.classList.toggle("rotate");
-      }, 1000);
+        msgRef.current.innerHTML = "😃 Bora criar outra nota??";
+      }, 1800);
     } else {
       setIsLoading(false);
       msgRef.current.innerHTML = "🙁 Ops! Algo deu errado. Tente novamente.";
     }
   };
+
+  //Função para fechar o modal se clicar fora dele
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        modalAddNoteRef.current &&
+        !modalAddNoteRef.current.contains(event.target) &&
+        !iconRef.current.contains(event.target) // Impede que o clique no botão de abrir feche imediatamente
+      ) {
+        setModalOpen(false);
+        modalAddNoteRef.current.classList.remove("open");
+        iconRef.current.classList.remove("rotate");
+      }
+    }
+
+    if (modalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalOpen]);
 
   return (
     <>
@@ -126,7 +147,7 @@ export default function AddBtn({ onRefreshList }) {
             options={priorityOptions}
             onChange={(value) => handleSelectChange("selectPriority", value)}
             value={selectValues.selectPriority}
-            isDesabled={selectValues.selectType === 'note'}
+            isDesabled={selectValues.selectType === "note"}
           />
         </div>
 

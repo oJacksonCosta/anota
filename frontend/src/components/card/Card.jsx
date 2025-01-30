@@ -200,9 +200,31 @@ export default function Card({
   useEffect(() => {
     if (isShowModalConfirm) {
       modalConfirmRef.current.classList.add("active");
+      document.body.style.overflow = "hidden";
     } else {
       modalConfirmRef.current.classList.remove("active");
+      document.body.style.overflow = "auto";
     }
+  }, [isShowModalConfirm]);
+
+  // Função para fechar o modal de confirmação quando clica fora dele
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        modalConfirmRef.current &&
+        !modalConfirmRef.current.contains(event.target)
+      ) {
+        setIsShowModalConfirm(false);
+      }
+    }
+
+    if (isShowModalConfirm) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isShowModalConfirm]);
 
   return (
@@ -301,12 +323,15 @@ export default function Card({
         </div>
       </div>
 
-      <div className={`overlay ${isShowModalConfirm ? "active" : ""}`}></div>
       <div className="delete-modal" ref={modalConfirmRef}>
         <p>Deseja realmente excluir?</p>
         <div className="confirm-btns">
-          <button id="yes">Sim</button>
-          <button id="no">Não</button>
+          <button id="yes" onClick={handleDeleteNote}>
+            Sim
+          </button>
+          <button id="no" onClick={() => setIsShowModalConfirm(false)}>
+            Não
+          </button>
         </div>
       </div>
     </div>

@@ -25,6 +25,7 @@
   overflow-x: hidden;
   padding-inline: 1rem;
   width: 100%;
+  position: static;
 
   /* Remover a barra de rolagem */
   scrollbar-width: none; /* Firefox */
@@ -33,4 +34,28 @@
 
 .cards-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari e Opera */
+}
+
+.empty-list {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-list > i {
+  font-size: 5rem;
+  color: #ffffff1e;
+}
+
+.empty-list > p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff1e;
+}
+
+.empty-list.show {
+  display: flex;
 }
