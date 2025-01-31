@@ -180,7 +180,7 @@ hr {
 }
 
 .type {
-  border: 2px solid var(--white-transparent);
+  outline: 2px solid var(--white-transparent);
   border-radius: 0.5rem;
   color: #ffffff80;
   font-size: 0.8rem;
@@ -212,11 +212,11 @@ hr {
   display: flex;
   font-size: 0.8rem;
   font-weight: 600;
-  height: 1.5rem;
+  height: fit-content;
   justify-content: center;
   margin-right: 0.5rem;
   overflow: hidden;
-  padding-inline: 0.6rem;
+  padding: 0.3rem 0.6rem;
   transition: background-color 0.3s;
 }
 

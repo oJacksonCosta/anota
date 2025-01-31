@@ -6,7 +6,8 @@ export default function InputSelect({
   placeholder,
   value,
   width = "100%",
-  isDesabled
+  isDesabled,
+  removeSelection = true
 }) {
   const customStyles = {
     container: (base) => ({
