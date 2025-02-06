@@ -56,7 +56,6 @@ export default function User() {
   const handleOpenModal = () => {
     setModalOpen(!modalOpen);
     userModalref.current.classList.toggle("open");
-    userIconRef.current.classList.toggle("porra");
   };
 
   // Fecha o modal ao clicar fora dele
@@ -69,7 +68,6 @@ export default function User() {
       ) {
         setModalOpen(false);
         userModalref.current.classList.remove("open");
-        userIconRef.current.classList.remove("rotate");
       }
     }
 
@@ -86,7 +84,7 @@ export default function User() {
     if (modalOpen) {
       userIconRef.current.style.color = "#7580ff";
     } else {
-      userIconRef.current.style.color = "#ffffff1e";
+      userIconRef.current.style.color = "#ffffff38";
     }
   }, [modalOpen]);
 

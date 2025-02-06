@@ -6,14 +6,14 @@
 
 .user-icon {
   font-size: 2.5rem;
-  color: #ffffff1e;
+  color: #ffffff38;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
 .user-icon:hover {
   color: var(--blue) !important;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .user-modal {
@@ -74,7 +74,7 @@
 
 .user-modal.open {
   visibility: visible;
-  animation: modalIn 0.4s ease-in-out forwards;
+  animation: modalIn 0.3s ease-in-out forwards;
   pointer-events: all;
 }
 
