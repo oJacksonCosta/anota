@@ -59,7 +59,6 @@
   min-height: 400px;
   border-radius: 1rem;
   box-shadow: 0 0.6rem 0.6rem 0.1rem #0000004f;
-  opacity: 1;
   pointer-events: none;
   display: flex;
   flex-direction: column;

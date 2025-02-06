@@ -2,9 +2,16 @@
   bottom: 1.5rem;
   font-size: 0.8rem;
   position: absolute;
+  color: #ffffff31;
 }
 
 .copyright > span {
   font-size: 0.8rem;
   font-weight: 700;
+}
+
+@media (max-height: 548px) {
+  .copyright {
+    display: none;
+  }
 }

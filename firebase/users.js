@@ -3,12 +3,15 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebaseConfig.js";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig.js";
 
 // Registra um novo usuário
 export const registerUser = async (email, password) => {
   let ret = {
     status: false,
     errorMessage: "",
+    userId: "",
   };
 
   try {
@@ -23,6 +26,7 @@ export const registerUser = async (email, password) => {
 
     ret.status = true;
     ret.errorMessage = "";
+    ret.userId = user.uid;
   } catch (err) {
     switch (err.code) {
       case "auth/email-already-in-use":
@@ -70,6 +74,30 @@ export const registerUser = async (email, password) => {
   return ret;
 };
 
+// Registra o nome do usuário
+export const registerName = async (userId, name) => {
+  let ret = {
+    status: false,
+    errorMessage: "",
+  };
+
+  try {
+    const docRef = await addDoc(collection(db, "users"), {
+      userId: userId,
+      name: name,
+    });
+
+    ret.status = true;
+    ret.errorMessage = "";
+  } catch (err) {
+    //console.error("Erro ao adicionar o nome do usuário: ", err);
+    ret.status = false;
+    ret.errorMessage = "Erro ao adicionar o nome do usuário: " + err;
+  }
+
+  return ret;
+};
+
 // Login de usuário
 export const loginUser = async (email, password) => {
   let ret = {
@@ -96,7 +124,7 @@ export const loginUser = async (email, password) => {
     switch (err.code) {
       case "auth/invalid-email":
         ret.status = false;
-        ret.errorMessage = "E-mail inválido.";
+        ret.errorMessage = "E-mail informado inválido.";
 
         break;
       case "auth/invalid-credential":

@@ -86,7 +86,10 @@ export default function AddBtn({ onRefreshList }) {
     //console.log(response);
 
     if (response) {
-      onRefreshList();
+      setTimeout(() => {
+        onRefreshList();
+      }, 100);
+
       setTitle("");
       setContent("");
       setSelectValues({
@@ -141,6 +144,7 @@ export default function AddBtn({ onRefreshList }) {
             options={typeOptions}
             onChange={(value) => handleSelectChange("selectType", value)}
             value={selectValues.selectType}
+            removeSelection={false}
           />
           <InputSelect
             placeholder="Prioridade"
@@ -148,6 +152,7 @@ export default function AddBtn({ onRefreshList }) {
             onChange={(value) => handleSelectChange("selectPriority", value)}
             value={selectValues.selectPriority}
             isDesabled={selectValues.selectType === "note"}
+            removeSelection={false}
           />
         </div>
 

@@ -8,8 +8,6 @@ import {
   query,
   where,
   getDocs,
-  or,
-  orderBy,
   Timestamp,
 } from "firebase/firestore";
 
@@ -193,6 +191,31 @@ export const getNotes = async (userId) => {
     ret.notes = [];
   }
 
+  return ret;
+};
+
+// Obtem o nome do usuário
+export const getUserName = async (userId) => {
+  let ret = {
+    status: false,
+    errorMessage: "",
+    name: "",
+  };
+  try {
+    const userRef = collection(db, "users");
+    const q = query(userRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      ret.name = doc.data().name;
+    });
+    ret.status = true;
+    ret.errorMessage = "";
+  } catch (error) {
+    //console.error("Erro ao obter o nome do usuário: ", error);
+    ret.status = false;
+    ret.errorMessage = "Erro ao obter o nome do usuário: " + error;
+    ret.name = "";
+  }
   return ret;
 };
 

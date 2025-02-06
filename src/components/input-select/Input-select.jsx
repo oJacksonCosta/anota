@@ -7,7 +7,7 @@ export default function InputSelect({
   value,
   width = "100%",
   isDesabled,
-  removeSelection = true
+  removeSelection = true,
 }) {
   const customStyles = {
     container: (base) => ({
@@ -24,7 +24,11 @@ export default function InputSelect({
       height: "2.8rem",
       boxShadow: "none",
       paddingInline: "0.2rem",
-      outline: isDesabled ? "none" : isFocused ? "2px solid var(--blue)" : "none",
+      outline: isDesabled
+        ? "none"
+        : isFocused
+        ? "2px solid var(--blue)"
+        : "none",
     }),
     dropdownIndicator: (base, { isFocused }) => ({
       ...base,
@@ -48,7 +52,7 @@ export default function InputSelect({
       outline: "1px solid var(--blue)",
       boxShadow: "0 0.4rem 0.6rem #0000004b",
       padding: "0.5rem",
-      display: isDesabled ? "none" : "block"
+      display: isDesabled ? "none" : "block",
     }),
     option: (base, { isFocused }) => ({
       ...base,
@@ -58,7 +62,10 @@ export default function InputSelect({
       borderRadius: "0.4rem",
       color: "var(--white)",
     }),
-    
+    clearIndicator: (base) => ({
+      ...base,
+      display: !removeSelection ? "none" : "block",
+    }),
   };
 
   const handleChange = (selectedOption) => {

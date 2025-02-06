@@ -1,0 +1,90 @@
+.user-container {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+}
+
+.user-icon {
+  font-size: 2.5rem;
+  color: #ffffff1e;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.user-icon:hover {
+  color: var(--blue) !important;
+  transition: 0.3s ease-in-out;
+}
+
+.user-modal {
+  position: absolute;
+  top: 3.2rem;
+  right: 0;
+  background-color: #212134;
+  border: 1px solid var(--blue);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.6rem 0.6rem 0.1rem #0000004f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 12rem;
+  overflow: hidden;
+  opacity: 0;
+
+  transform-origin: top right;
+}
+
+.user-modal > h3 {
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.user-modal > button {
+  width: 100%;
+  border: none;
+  background-color: var(--white-transparent);
+  padding: 0.5rem 0;
+  color: var(--white);
+  border-radius: 0.5rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.user-modal > button:hover {
+  background-color: var(--blue);
+  transition: 0.3s;
+}
+
+#account {
+  cursor: not-allowed;
+}
+
+#account:hover {
+  background-color: var(--white-transparent);
+}
+
+.user-modal.open {
+  visibility: visible;
+  animation: modalIn 0.4s ease-in-out forwards;
+  pointer-events: all;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,24 +1,23 @@
 import "./caption.css";
 
 export default function Caption() {
-
   return (
-    <div className="caption" onMouseEnter>
+    <div className="caption">
       <div>
-        <div id="green"></div>
-        <p className="caption-description">Tarefa com prioridade baixa</p>
+        <div id="high"></div>
+        <p>Prioridade alta</p>
       </div>
       <div>
-        <div id="orange"></div>
-        <p className="caption-description">Tarefa com prioridade média</p>
+        <div id="medium"></div>
+        <p>Prioridade média</p>
       </div>
       <div>
-        <div id="red"></div>
-        <p className="caption-description">Tarefa com prioridade alta</p>
+        <div id="low"></div>
+        <p>Prioridade baixa</p>
       </div>
       <div>
-        <div id="blue"></div>
-        <p className="caption-description">Anotação</p>
+        <div id="note"></div>
+        <p>Anotação</p>
       </div>
     </div>
   );

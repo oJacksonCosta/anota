@@ -4,7 +4,7 @@ import {
   deleteNote,
   concludeTask,
   reopenTask,
-  updateNote
+  updateNote,
 } from "../../../firebase/notes";
 
 export default function Card({
@@ -16,6 +16,8 @@ export default function Card({
   type,
   date,
   onRefreshList,
+  errorNotify,
+  sucessNotify,
 }) {
   const [priorityColor, setPriorityColor] = useState("");
   const [typeIcon, setTypeIcon] = useState("");
@@ -41,15 +43,19 @@ export default function Card({
     switch (priority) {
       case "low":
         setPriorityColor("green");
+
         break;
       case "medium":
         setPriorityColor("orange");
+
         break;
       case "high":
         setPriorityColor("red");
+
         break;
       default:
         setPriorityColor("blue");
+
         break;
     }
   }, [priority]);
@@ -158,8 +164,10 @@ export default function Card({
       openTaskRef.current.removeAttribute("disabled");
       checkBtnRef.current.removeAttribute("disabled");
       onRefreshList();
+
+      sucessNotify("Alteração salva com sucesso!");
     } else {
-      console.error("Erro ao salvar nota:", response?.errorMessage);
+      errorNotify(`Erro ao salvar alteração! ${response.message}`);
     }
   };
 
@@ -169,29 +177,33 @@ export default function Card({
     if (response?.status) {
       setIsExpanded(false);
       onRefreshList();
+
+      sucessNotify("Tarefa concluída com sucesso!");
     } else {
-      console.error(
-        "Erro ao concluir tarefa:",
-        response?.errorMessage || "Resposta inválida."
-      );
+      errorNotify(`Erro ao concluir tarefa! ${response.message}`);
     }
   };
 
   // Função para reabrir a tarefa
-  const handleReopenTask = () => {
-    reopenTask(id);
+  const handleReopenTask = async () => {
+    const response = await reopenTask(id);
     onRefreshList();
+    if (response?.status) {
+      sucessNotify("Tarefa reaberta com sucesso!");
+    } else {
+      errorNotify(`Erro ao reabrir tarefa! ${response.message}`);
+    }
   };
 
   // Função para excluir a nota
   const handleDeleteNote = async () => {
     const response = await deleteNote(id);
     if (response?.status) {
-      setTimeout(() => {
-        onRefreshList();
-      }, 100);
+      onRefreshList();
+
+      sucessNotify("Excluído com sucesso!");
     } else {
-      console.error("Erro ao excluir nota:", response?.errorMessage);
+      errorNotify(`Erro ao excluir! ${response.message}`);
     }
   };
 

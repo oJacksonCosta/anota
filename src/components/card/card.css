@@ -127,13 +127,13 @@ hr {
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 70%;
-  white-space: nowrap;
+  width: 80%;
 }
 
 .content {
   color: var(--white);
   font-size: 1rem;
+  text-align: left;
   margin-bottom: 1.5rem;
   word-wrap: break-word;
   hyphens: auto;
@@ -305,4 +305,36 @@ hr {
   background-color: var(--blue);
   color: var(--white);
   transition: 0.3s;
+}
+
+.tippy-box[data-theme~="note"] {
+  background-color: var(--blue);
+}
+
+.tippy-box[data-theme~="note"] .tippy-arrow {
+  color: var(--blue);
+}
+
+.tippy-box[data-theme~="low"] {
+  background-color: var(--green);
+}
+
+.tippy-box[data-theme~="low"] .tippy-arrow {
+  color: var(--green);
+}
+
+.tippy-box[data-theme~="medium"] {
+  background-color: var(--orange);
+}
+
+.tippy-box[data-theme~="medium"] .tippy-arrow {
+  color: var(--orange);
+}
+
+.tippy-box[data-theme~="high"] {
+  background-color: var(--red);
+}
+
+.tippy-box[data-theme~="high"] .tippy-arrow {
+  color: var(--red);
 }

@@ -1,0 +1,20 @@
+p {
+  text-align: center;
+}
+
+#password-recovery {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+@media (max-width: 425px) {
+  p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-height: 548px) {
+  p {
+    margin: 1rem;
+  }
+}

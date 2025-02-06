@@ -1,4 +1,15 @@
 .logo {
-  margin-bottom: 2rem;
   width: 180px;
+}
+
+@media (max-width: 425px) {
+  .logo {
+    width: 120px;
+  }
+}
+
+@media (max-height: 548px) {
+  .logo {
+    width: 120px;
+  }
 }

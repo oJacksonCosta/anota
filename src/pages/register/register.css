@@ -1,11 +1,26 @@
 p {
   color: var(--white);
   font-weight: 200;
-  margin-bottom: 2rem;
 }
 
-#link-to {
+.link-to {
   color: var(--blue);
   font-weight: 700;
   text-decoration: none;
+}
+
+p {
+  text-align: center;
+}
+
+@media (max-width: 425px) {
+  p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-height: 548px) {
+  p {
+    margin: 1rem;
+  }
 }

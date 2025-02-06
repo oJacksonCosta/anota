@@ -1,5 +1,4 @@
 import "./home.css";
-import Caption from "../../components/caption/Caption";
 import Background from "../../components/background/Background";
 import InputSelect from "../../components/input-select/Input-select";
 import Search from "../../components/search/Search";
@@ -7,7 +6,9 @@ import { useRef, useState, useEffect } from "react";
 import Card from "../../components/card/Card";
 import { getNotes } from "../../../firebase/notes";
 import AddBtn from "../../components/add-btn/Add-btn";
-import LogoutBtn from "../../components/logout-btn/Logout";
+import toast, { Toaster } from "react-hot-toast";
+import Caption from "../../components/caption/Caption";
+import User from "../../components/user/User";
 
 export default function Home() {
   const cardContainer = useRef(null);
@@ -25,6 +26,31 @@ export default function Home() {
   });
 
   const [searchTerm, setSearchTerm] = useState("");
+
+  //Notificação
+  const sucessNotify = (message) =>
+    toast.success(message, {
+      duration: 2000,
+      position: "top-center",
+      style: {
+        background: "#212134",
+        color: "#ffffff",
+        border: "1px solid #7580ff",
+        borderRadius: "0.6rem",
+      },
+    });
+
+  const errorNotify = (message) =>
+    toast.error(message, {
+      duration: 2000,
+      position: "top-center",
+      style: {
+        background: "#212134",
+        color: "#ffffff",
+        border: "1px solid #7580ff",
+        borderRadius: "0.6rem",
+      },
+    });
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -86,7 +112,7 @@ export default function Home() {
         emptyListRef.current.classList.remove("show");
       }
     } else {
-      window.alert(`Erro ao buscar as notas: ${response.errorMessage}`);
+      errorNotify(`Erro ao buscar as notas: ${response.errorMessage}`);
     }
   };
 
@@ -145,8 +171,11 @@ export default function Home() {
 
   return (
     <Background>
+      <Toaster />
+
       <div className="home-container" ref={homeContainerRef}>
         <Caption />
+
         <div className="filter">
           <InputSelect
             options={typeOptions}
@@ -186,13 +215,15 @@ export default function Home() {
               type={note.type}
               date={note.date}
               onRefreshList={onRefreshList}
+              errorNotify={errorNotify}
+              sucessNotify={sucessNotify}
             />
           ))}
         </div>
 
         <AddBtn onRefreshList={onRefreshList} />
 
-        <LogoutBtn />
+        <User />
       </div>
     </Background>
   );

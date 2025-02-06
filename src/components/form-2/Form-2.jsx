@@ -4,19 +4,12 @@ import Button1 from "../button-1/Button-1";
 import { loginUser } from "../../../firebase/users";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Alert from "../alert/Alert";
 
-export default function Form2() {
+export default function Form2({ errorNotify, sucessNotify }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-  const [alertType, setAlertType] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
-
-  const [time, setTime] = useState(3000);
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -32,15 +25,13 @@ export default function Form2() {
 
     // Validações
     if (!email) {
-      setAlertMessage("Por favor, preencha o campo de e-mail.");
-      setAlertType("error");
-      setShowAlert(true);
+      errorNotify("Por favor, preencha o campo de e-mail.");
+
       setIsLoading(false);
       return;
     } else if (!password) {
-      setAlertMessage("Por favor, preencha o campo de senha.");
-      setAlertType("error");
-      setShowAlert(true);
+      errorNotify("Por favor, preencha o campo de senha.");
+
       setIsLoading(false);
       return;
     }
@@ -49,9 +40,7 @@ export default function Form2() {
     setIsLoading(true);
 
     if (result.status) {
-      setAlertMessage("Login realizado com sucesso!");
-      setAlertType("success");
-      setShowAlert(true);
+      sucessNotify("Login realizado com sucesso!");
 
       //Salva o id do usuário no localStorage ou sessionStorage
       if (isChecked) {
@@ -62,25 +51,15 @@ export default function Form2() {
         localStorage.removeItem("userId");
       }
 
-      // Limpa os campos
-      setEmail("");
-      setPassword("");
-      setTime(1200);
-
       // Redireciona para a página de login imediatamente após o alerta
       setTimeout(() => {
         navigate("/home");
       }, 2000);
     } else {
-      setAlertMessage(result.errorMessage);
-      setAlertType("error");
-      setShowAlert(true);
+      errorNotify(result.errorMessage);
+
       setIsLoading(false);
     }
-  };
-
-  const closeAlert = () => {
-    setShowAlert(false);
   };
 
   return (
@@ -108,15 +87,7 @@ export default function Form2() {
         isLoading={isLoading}
         type="submit"
       />
-      <div className="alert-container">
-        <Alert
-          message={alertMessage}
-          type={alertType}
-          isShowing={showAlert}
-          onClose={closeAlert}
-          time={time}
-        />
-      </div>
+
       <div className="remember-me">
         <input
           type="checkbox"
