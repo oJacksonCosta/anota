@@ -1,6 +1,7 @@
 import "./user.css";
 import { getUserName } from "../../../firebase/notes";
 import { useEffect, useState, useRef } from "react";
+import Logo from "../logo/Logo";
 
 export default function User() {
   const [userName, setUserName] = useState("");
@@ -97,6 +98,8 @@ export default function User() {
       ></i>
 
       <div className="user-modal" ref={userModalref}>
+        <Logo width={"80%"} />
+
         <h3>{userName}</h3>
         <button id="account">Conta</button>
         <button onClick={handleLogout}>Sair</button>
