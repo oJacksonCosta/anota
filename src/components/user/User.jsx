@@ -98,7 +98,7 @@ export default function User() {
       ></i>
 
       <div className="user-modal" ref={userModalref}>
-        <Logo width={"80%"} />
+        <Logo width={"60%"} />
 
         <h3>{userName}</h3>
         <button id="account">Conta</button>
