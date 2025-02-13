@@ -121,9 +121,9 @@ export default function Home() {
   };
 
   // Pega a Quantidade de tarefas por prioridade e as notas
-  const highPriority = notes.filter((note) => note.priority === 'high').length;
-  const mediumPriority = notes.filter((note) => note.priority === 'medium').length;
-  const lowPriority = notes.filter((note) => note.priority === 'low').length;
+  const highPriority = notes.filter((note) => note.priority === 'high' && note.status === 'todo').length;
+  const mediumPriority = notes.filter((note) => note.priority === 'medium' && note.status === 'todo').length;
+  const lowPriority = notes.filter((note) => note.priority === 'low' && note.status === 'todo').length;
   const amountNotes = notes.filter((note) => note.type === 'note').length;
 
 
@@ -182,10 +182,10 @@ export default function Home() {
 
       <div className="home-container" ref={homeContainerRef}>
         <Caption 
-          highPriority = {highPriority}
-          mediumPriority = {mediumPriority}
-          lowPriority = {lowPriority}
-          notes = {amountNotes}
+          highPriority = {highPriority <= 99 ? highPriority : "99+"}
+          mediumPriority = {mediumPriority <= 99 ? mediumPriority : "99+"}
+          lowPriority = {lowPriority <= 99 ? lowPriority : "99+"}
+          notes = {amountNotes <= 99 ? amountNotes : "99+"}
         />
 
         <div className="filter">
