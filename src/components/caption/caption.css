@@ -7,8 +7,8 @@
   padding-inline: 0.5rem;
   border-radius: 0.5rem;
   background-color: #212134;
-  height: 6rem;
-  width: 2rem;
+  height: 8rem;
+  width: 2.5rem;
   overflow: hidden;
 
   position: fixed;
@@ -16,10 +16,11 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 1000;
+  transition: all 0.3s;
 }
 
 .caption:hover {
-  width: 9.5rem;
+  width: 10rem;
   transition: 0.4s;
 }
 
@@ -29,12 +30,12 @@
   align-items: center;
 }
 
-.caption p {
+.description {
   font-size: 0.8rem;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.2s ease;
   position: absolute;
-  left: 2rem;
+  left: 2.3rem;
   white-space: nowrap;
 }
 
@@ -47,9 +48,16 @@
 #medium,
 #low,
 #note {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 0.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.4rem;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #high {
   background-color: var(--red);
@@ -63,3 +71,10 @@
 #note {
   background-color: var(--blue);
 }
+
+.amount-tasks {
+  position: relative;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+

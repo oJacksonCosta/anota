@@ -120,6 +120,13 @@ export default function Home() {
     listCards();
   };
 
+  // Pega a Quantidade de tarefas por prioridade e as notas
+  const highPriority = notes.filter((note) => note.priority === 'high').length;
+  const mediumPriority = notes.filter((note) => note.priority === 'medium').length;
+  const lowPriority = notes.filter((note) => note.priority === 'low').length;
+  const amountNotes = notes.filter((note) => note.type === 'note').length;
+
+
   // Aplica os filtros (tipo, prioridade, status, e pesquisa)
   const applyFilters = () => {
     let filtered = notes;
@@ -174,7 +181,12 @@ export default function Home() {
       <Toaster />
 
       <div className="home-container" ref={homeContainerRef}>
-        <Caption />
+        <Caption 
+          highPriority = {highPriority}
+          mediumPriority = {mediumPriority}
+          lowPriority = {lowPriority}
+          notes = {amountNotes}
+        />
 
         <div className="filter">
           <InputSelect

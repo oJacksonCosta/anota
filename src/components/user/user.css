@@ -33,6 +33,7 @@
   width: 12rem;
   overflow: hidden;
   opacity: 0;
+  pointer-events: none;
 
   transform-origin: top right;
 }
